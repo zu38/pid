@@ -3,75 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Room Button</title>
+    <title>Game Room Buttons</title>
     <style>
         body {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background-color: #121212;
+            min-height: 100vh;
+            background: radial-gradient(circle at center, #1a1a1a, #000);
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 25px;
+            padding: 20px;
+            margin: 0;
         }
+
+        .game-button-container {
+            position: relative;
+            perspective: 1000px;
+            animation: float 3s ease-in-out infinite;
+        }
+
         .game-button {
-            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            position: relative;
             color: white;
-            font-size: 18px;
+            font-size: 1.2em;
             font-weight: bold;
             border: none;
-            padding: 15px 40px;
-            border-radius: 30px;
+            padding: 18px 45px;
+            border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(255, 75, 43, 0.5);
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             text-transform: uppercase;
             outline: none;
-            text-decoration: none;
-            display: inline-block;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            letter-spacing: 1px;
+            width: 200px;
         }
+
+        .game-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255,255,255,0.3),
+                transparent
+            );
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
         .game-button:hover {
-            background: linear-gradient(45deg, #ff4b2b, #ff416c);
-            box-shadow: 0 6px 15px rgba(255, 75, 43, 0.7);
-            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .game-button:hover::before {
+            left: 100%;
+        }
+
+        .game-button::after {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            border-radius: 50px;
+            background: linear-gradient(45deg, transparent 20%, rgba(255,255,255,0.15) 50%, transparent 80%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .game-button:hover::after {
+            opacity: 1;
+        }
+
+        .game-button span {
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                gap: 15px;
+                padding: 15px;
+            }
+            .game-button {
+                padding: 15px 35px;
+                font-size: 1em;
+                width: 160px;
+            }
+        }
+
+        /* Unique colors for each button */
+        .game-button-container:nth-child(1) .game-button { 
+            background: linear-gradient(45deg, #ff6b6b, #ff416c);
+            box-shadow: 0 5px 15px rgba(255, 75, 43, 0.4);
+        }
+        .game-button-container:nth-child(2) .game-button { 
+            background: linear-gradient(45deg, #4e54c8, #8f94fb);
+            box-shadow: 0 5px 15px rgba(78, 84, 200, 0.4);
+        }
+        .game-button-container:nth-child(3) .game-button { 
+            background: linear-gradient(45deg, #00b09b, #96c93d);
+            box-shadow: 0 5px 15px rgba(0, 176, 155, 0.4);
+        }
+        .game-button-container:nth-child(4) .game-button { 
+            background: linear-gradient(45deg, #fd1d1d, #fcb045);
+            box-shadow: 0 5px 15px rgba(253, 29, 29, 0.4);
+        }
+        .game-button-container:nth-child(5) .game-button { 
+            background: linear-gradient(45deg, #833ab4, #fd1d1d);
+            box-shadow: 0 5px 15px rgba(131, 58, 180, 0.4);
+        }
+        .game-button-container:nth-child(6) .game-button { 
+            background: linear-gradient(45deg, #11998e, #38ef7d);
+            box-shadow: 0 5px 15px rgba(17, 153, 142, 0.4);
+        }
+        .game-button-container:nth-child(7) .game-button { 
+            background: linear-gradient(45deg, #4568dc, #b06ab3);
+            box-shadow: 0 5px 15px rgba(69, 104, 220, 0.4);
+        }
+        .game-button-container:nth-child(8) .game-button { 
+            background: linear-gradient(45deg, #ff0084, #33001b);
+            box-shadow: 0 5px 15px rgba(255, 0, 132, 0.4);
+        }
+        .game-button-container:nth-child(9) .game-button { 
+            background: linear-gradient(45deg, #7F00FF, #E100FF);
+            box-shadow: 0 5px 15px rgba(127, 0, 255, 0.4);
+        }
+        .game-button-container:nth-child(10) .game-button { 
+            background: linear-gradient(45deg, #FF416C, #FF4B2B);
+            box-shadow: 0 5px 15px rgba(255, 65, 108, 0.4);
+        }
+        .game-button-container:nth-child(11) .game-button { 
+            background: linear-gradient(45deg, #00c3ff, #ffff1c);
+            box-shadow: 0 5px 15px rgba(0, 195, 255, 0.4);
         }
     </style>
 </head>
 <body>
+    <div class="game-button-container">
+        <a href="https://dl.juwa777.com" target="_blank">
+            <button class="game-button"><span>Juwa</span></button>
+        </a>
+    </div>
 
-    <a href="https://dl.juwa777.com" target="_blank">
-        <button class="game-button">Juwa</button>
-    </a>
-    <a href="http://start.firekirin.xyz:8580/index.html" target="_blank">
-        <button class="game-button">Firekirin</button>
-    </a>
-    <a href="https://pandamaster.vip:8888/index.html" target="_blank">
-        <button class="game-button">Pandamaster</button>
-    </a>
-    <a href="https://download.gamevault999.com/" target="_blank">
-        <button class="game-button">Gamevault</button>
-    </a>
-    <a href="http://start.orionstars.vip:8580/index.html" target="_blank">
-        <button class="game-button">Orionstar</button>
-    </a>
-    <a href="https://yolo777.game/" target="_blank">
-        <button class="game-button">Yolo</button>
-    </a>
-    <a href="https://www.gameroom777.com/" target="_blank">
-        <button class="game-button">Gameroom</button>
-    </a>
-    <a href="https://www.vblink777.club/" target="_blank">
-        <button class="game-button">Vblink</button>
-    </a>
-    <a href="https://milkywayapp.xyz/" target="_blank">
-        <button class="game-button">Milkyway</button>
-    </a>
-    <a href="http://m.lasvegassweeps.com/" target="_blank">
-        <button class="game-button">Vegasweep</button>
-    </a>
-    <a href="https://bet777.eu/" target="_blank">
-        <button class="game-button">Riversweep</button>
-    </a>
+    <div class="game-button-container">
+        <a href="http://start.firekirin.xyz:8580/index.html" target="_blank">
+            <button class="game-button"><span>Firekirin</span></button>
+        </a>
+    </div>
 
+    <div class="game-button-container">
+        <a href="https://pandamaster.vip:8888/index.html" target="_blank">
+            <button class="game-button"><span>Pandamaster</span></button>
+        </a>
+    </div>
+
+    <div class="game-button-container">
+        <a href="https://download.gamevault999.com/" target="_blank">
+            <button class="game-button"><span>Gamevault</span></button>
+        </a>
+    </div>
+
+    <div class="game-button-container">
+        <a href="http://start.orionstars.vip:8580/index.html" target="_blank">
+            <button class="game-button"><span>Orionstar</span></button>
+        </a>
+    </div>
+
+    <div class="game-button-container">
+        <a href="https://yolo777.game/" target="_blank">
+            <button class="game-button"><span>Yolo</span></button>
+        </a>
+    </div>
+
+    <div class="game-button-container">
+        <a href="https://www.gameroom777.com/" target="_blank">
+            <button class="game-button"><span>Gameroom</span></button>
+        </a>
+    </div>
+
+    <div class="game-button-container">
+        <a href="https://www.vblink777.club/" target="_blank">
+            <button class="game-button"><span>Vblink</span></button>
+        </a>
+    </div>
+
+    <div class="game-button-container">
+        <a href="https://milkywayapp.xyz/" target="_blank">
+            <button class="game-button"><span>Milkyway</span></button>
+        </a>
+    </div>
+
+    <div class="game-button-container">
+        <a href="http://m.lasvegassweeps.com/" target="_blank">
+            <button class="game-button"><span>Vegasweep</span></button>
+        </a>
+    </div>
+
+    <div class="game-button-container">
+        <a href="https://bet777.eu/" target="_blank">
+            <button class="game-button"><span>Riversweep</span></button>
+        </a>
+    </div>
 </body>
 </html>
